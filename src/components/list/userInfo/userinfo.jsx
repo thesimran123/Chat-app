@@ -1,11 +1,19 @@
 import "./userInfo.css";
+import { useUserStore } from "../../../lib/userStore";
 
 const Userinfo = () => {
+  const { currentUser } = useUserStore();
+
+  // Ensure currentUser is defined before attempting to access its properties
+  if (!currentUser) {
+    return <div>Loading user info...</div>;
+  }
+
   return (
     <div className="userInfo">
       <div className="user">
-        <img src="./avatar.png" alt="" />
-        <h2>Simranjit</h2>
+        <img src={currentUser.avatar || "./avatar.png"} alt="" />
+        <h2>{currentUser.username}</h2>
       </div>
       <div className="icons">
         <img src="./more.png" alt="" />
